@@ -1,0 +1,8 @@
+pandas
+geopandas
+numpy
+scikit-image
+pillow
+wordcloud
+tqdm
+matplotlib
