@@ -24,7 +24,7 @@ parser.add_argument("shapefile")
 parser.add_argument("column_used")
 parser.add_argument("count_data_filename")
 parser.add_argument("output_filename")
-parser.add_argument("-f","--format",default="pdf",choices=["html","png","pdf"])
+parser.add_argument("-f","--format",default="pdf",choices=["svg","png","pdf"])
 parser.add_argument("--dpi",type=int,default=360)
 
 args = parser.parse_args()#"france_metropolitaine code_insee wikipedia_dep.json wikipedia2.png".split())
@@ -40,7 +40,7 @@ if not os.path.exists(args.count_data_filename):
 gdf = gpd.read_file(args.shapefile)
 count_data = json.load(open(args.count_data_filename))
 column_selected = args.column_used
-is_svg = (True if args.format in ("html","pdf") else False)
+is_svg = (True if args.format in ("svg","pdf") else False)
 is_pdf = (True if args.format =="pdf" else False)
 
 if not column_selected in gdf:
@@ -53,7 +53,7 @@ svg=None
 header = ""
 
 i = 0
-for x in tqdm(gdf[column_selected].values[:4]):
+for x in tqdm(gdf[column_selected].values):
     if not x in count_data:
         continue
     
